@@ -5,11 +5,8 @@
  */
 
 import React from 'react';
-import 'react-phone-number-input/style.css';
 import firebase from '../../firebase';
 // import PropTypes from 'prop-types';
-const successImageUri =
-  'https://cdn.pixabay.com/photo/2015/06/09/16/12/icon-803718_1280.png';
 // import styled from 'styled-components';
 
 /* eslint-disable react/prefer-stateless-function */
@@ -54,7 +51,7 @@ class LoginComponent extends React.Component {
     firebase
       .auth()
       .signInWithPhoneNumber(
-        `+1   ${phoneNumber}`,
+        `+1 ${phoneNumber}`,
         new firebase.auth.RecaptchaVerifier('recaptcha-container'),
       )
       .then(confirmResult =>
@@ -62,7 +59,7 @@ class LoginComponent extends React.Component {
       )
       .catch(error =>
         this.setState({
-          message: `Sign In With Phone Number Error: ${error.message}`,
+          message: `${error.message}`,
         }),
       );
   };
@@ -110,10 +107,23 @@ class LoginComponent extends React.Component {
           backgroundColor: 'linen',
         }}
       >
-        <span style={{ display: 'flex', justifyContent: 'center', width: '100vw', margin: 20 }}>
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100vw',
+            padding: 20,
+          }}
+        >
           <img
+            alt="logo"
             draggable="false"
-            style={{ userSelect: 'none', width: 360, height: 'auto' }}
+            style={{
+              userSelect: 'none',
+              objectFit: 'cover',
+              width: 360,
+              height: 60,
+            }}
             src="https://premiumads.org/assets/media/premiumLogo.png"
           />
         </span>
@@ -125,7 +135,9 @@ class LoginComponent extends React.Component {
         >
           <iframe
             title="hello"
-            style={{ pointerEvents: 'none' }}
+            style={{
+              pointerEvents: 'none',
+            }}
             width="360"
             height="600"
             scrolling="false"
@@ -138,7 +150,7 @@ class LoginComponent extends React.Component {
             width: '100vw',
             display: 'flex',
             justifyContent: 'center',
-            margin: 20,
+            padding: 20,
           }}
         >
           <input
@@ -155,6 +167,7 @@ class LoginComponent extends React.Component {
             value={phoneNumber}
           />
           <button
+            type="submit"
             style={{
               marginLeft: 20,
               cursor: 'pointer',
@@ -180,7 +193,18 @@ class LoginComponent extends React.Component {
     if (!message.length) return null;
 
     return (
-      <p style={{ padding: 5, backgroundColor: '#000', color: '#fff' }}>
+      <p
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          bottom: 0,
+          width: '100vw',
+          padding: 10,
+          backgroundColor: '#828BD3',
+          color: 'linen',
+          fontWeight: 900,
+        }}
+      >
         {message}
       </p>
     );
@@ -190,20 +214,89 @@ class LoginComponent extends React.Component {
     const { codeInput } = this.state;
 
     return (
-      <div style={{ marginTop: 25, padding: 25 }}>
-        <p>Enter verification code below:</p>
-        <input
-          style={{ height: 40, marginTop: 15, marginBottom: 15 }}
-          onChange={e => this.setState({ codeInput: e.target.value })}
-          placeholder="Code ... "
-          value={codeInput}
-        />
-        <button
-          style={{ backgroundColor: '#841584' }}
-          onClick={this.confirmCode}
+      <div
+        style={{
+          padding: 10,
+          display: 'flex',
+          width: '100vw',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          backgroundColor: 'linen',
+        }}
+      >
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100vw',
+            padding: 20,
+          }}
         >
-          confirm
-        </button>
+          <img
+            alt="logo"
+            draggable="false"
+            style={{
+              userSelect: 'none',
+              objectFit: 'cover',
+              width: 360,
+              height: 60,
+            }}
+            src="https://premiumads.org/assets/media/premiumLogo.png"
+          />
+        </span>
+        <div
+          style={{
+            height: '600px',
+            overflow: 'hidden',
+          }}
+        >
+          <iframe
+            title="hello"
+            style={{
+              pointerEvents: 'none',
+            }}
+            width="360"
+            height="600"
+            scrolling="false"
+            allow="camera"
+            src="https://shaderbooth.com/?86cd1"
+          />
+        </div>
+        <div
+          style={{
+            width: '100vw',
+            display: 'flex',
+            justifyContent: 'center',
+            padding: 20,
+          }}
+        >
+          <input
+            style={{
+              backgroundColor: '#8BC8CD75',
+              padding: 10,
+              borderRadius: 5,
+              color: '#00000090',
+            }}
+            onChange={e => this.setState({ codeInput: e.target.value })}
+            placeholder="6-Digit Code"
+            value={codeInput}
+          />
+          <button
+            type="submit"
+            style={{
+              marginLeft: 20,
+              cursor: 'pointer',
+              backgroundColor: '#828BD3',
+              color: '#00000090',
+              padding: 10,
+              borderRadius: 5,
+              fontWeight: 700,
+            }}
+            onClick={this.confirmCode}
+          >
+            CONFIRM
+          </button>
+        </div>
       </div>
     );
   }
@@ -228,14 +321,22 @@ class LoginComponent extends React.Component {
               flex: 1,
             }}
           >
-            <img
-              src={successImageUri}
-              style={{ width: 100, height: 100, marginBottom: 25 }}
-            />
             <p style={{ fontSize: 25 }}>Signed In!</p>
             <p>{JSON.stringify(user)}</p>
-            <button style={{ backgroudColor: 'blue' }} onClick={this.signOut}>
-              logout
+            <button
+              type="submit"
+              style={{
+                marginLeft: 20,
+                cursor: 'pointer',
+                backgroundColor: '#828BD3',
+                color: '#00000090',
+                padding: 10,
+                borderRadius: 5,
+                fontWeight: 700,
+              }}
+              onClick={this.signOut}
+            >
+              LOGOUT
             </button>
           </div>
         )}
