@@ -16,9 +16,17 @@ import LoginComponent from '../../components/LoginComponent';
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <h1>
+      <div
+        style={{
+          display: 'flex',
+          width: '100vw',
+          height: '100vh',
+          flexWrap: 'wrap',
+          backgroundColor: 'linen',
+        }}
+      >
         <LoginComponent />
-      </h1>
+      </div>
     );
   }
 }
