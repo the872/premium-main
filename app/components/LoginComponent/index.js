@@ -258,6 +258,7 @@ class LoginComponent extends React.Component {
             }}
             onChange={e => this.setState({ codeInput: e.target.value })}
             placeholder="6-Digit Code"
+            type="number"
             value={codeInput}
           />
           <button
@@ -315,7 +316,6 @@ class LoginComponent extends React.Component {
           <div
             style={{
               display: 'flex',
-              padding: 15,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: 'linen',
@@ -480,23 +480,6 @@ class LoginComponent extends React.Component {
             </div>
           </div>
         )}
-        <div
-          style={{
-            position: 'fixed',
-            userSelect: 'none',
-            bottom: 10,
-            left: 0,
-            paddingLeft: 'calc(50vw - 76px)',
-            flexDirection: 'flex-row',
-            color: '#828BD3',
-            fontWeight: 900,
-            fontSize: 18,
-            fontFamily:
-              '"Geeza Pro", "Nadeem", "Al Bayan", "DecoType Naskh", "DejaVu Serif", "STFangsong", "STHeiti", "STKaiti", "STSong", "AB AlBayan", "AB Geeza", "AB Kufi", "DecoType Naskh", "Aldhabi", "Andalus", "Sakkal Majalla", "Simplified Arabic", "Traditional Arabic", "Arabic Typesetting", "Urdu Typesetting", "Droid Naskh", "Droid Kufi", "Roboto", "Tahoma", "Times New Roman", "Arial", seri',
-          }}
-        >
-          <span style={{ width: 152 }}>© PREMIUM ADS 2020</span>
-        </div>
         {this.renderMessage()}
       </div>
     );
