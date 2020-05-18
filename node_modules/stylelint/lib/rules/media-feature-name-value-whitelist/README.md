@@ -2,20 +2,19 @@
 
 Specify a whitelist of allowed media feature name and value pairs.
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-width: 768px) {}
 /**                ↑          ↑
  *    These features and values */
 ```
 
-This rule ignores media features within range and boolean context.
-
 ## Options
 
-```json
+```js
 {
   "unprefixed-media-feature-name": ["array", "of", "values"],
-  "/unprefixed-media-feature-name/": ["/regex/", "non-regex"]
+  "/unprefixed-media-feature-name/": ["/regex/", "non-regex", /real-regex/]
 }
 ```
 
@@ -28,41 +27,58 @@ as a regular expression. For example, `/width$/` will match `max-width` and
 
 Given:
 
-```json
+```
 {
   "min-width": ["768px", "1024px"],
   "/resolution/": ["/dpcm$/"]
 }
 ```
 
-The following pattern are considered violations:
+The following patterns are considered violations:
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-width: 1000px) {}
 ```
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-resolution: 2dpi) {}
 ```
 
-The following patterns are *not* considered violations:
+<!-- prettier-ignore -->
+```css
+@media screen and (min-width > 1000px) {}
+```
 
+The following patterns are _not_ considered violations:
+
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-width: 768px) {}
 ```
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-width: 1024px) {}
 ```
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (orientation: portrait) {}
 ```
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (min-resolution: 2dpcm) {}
 ```
 
+<!-- prettier-ignore -->
 ```css
 @media screen and (resolution: 10dpcm) {}
+```
+
+<!-- prettier-ignore -->
+```css
+@media screen and (768px < min-width) {}
 ```

@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import '@google/model-viewer';
 import firebase from '../../firebase';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
@@ -15,6 +16,7 @@ class LoginComponent extends React.Component {
     super(props);
     this.unsubscribe = null;
     this.state = {
+      chat: false,
       user: null,
       message: '',
       codeInput: '',
@@ -129,7 +131,7 @@ class LoginComponent extends React.Component {
         </span>
         <div
           style={{
-            height: '600px',
+            height: 270,
             overflow: 'hidden',
           }}
         >
@@ -139,7 +141,7 @@ class LoginComponent extends React.Component {
               pointerEvents: 'none',
             }}
             width="360"
-            height="600"
+            height="270"
             scrolling="false"
             allow="camera"
             src="https://shaderbooth.com/?33ac0"
@@ -187,29 +189,6 @@ class LoginComponent extends React.Component {
     );
   }
 
-  renderMessage() {
-    const { message } = this.state;
-
-    if (!message.length) return null;
-
-    return (
-      <p
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          bottom: 0,
-          width: '100vw',
-          padding: 10,
-          backgroundColor: '#828BD3',
-          color: 'linen',
-          fontWeight: 900,
-        }}
-      >
-        {message}
-      </p>
-    );
-  }
-
   renderVerificationCodeInput() {
     const { codeInput } = this.state;
 
@@ -246,7 +225,7 @@ class LoginComponent extends React.Component {
         </span>
         <div
           style={{
-            height: '600px',
+            height: 270,
             overflow: 'hidden',
           }}
         >
@@ -256,7 +235,7 @@ class LoginComponent extends React.Component {
               pointerEvents: 'none',
             }}
             width="360"
-            height="600"
+            height="270"
             scrolling="false"
             allow="camera"
             src="https://shaderbooth.com/?86cd1"
@@ -301,45 +280,224 @@ class LoginComponent extends React.Component {
     );
   }
 
+  renderMessage() {
+    const { message } = this.state;
+
+    if (!message.length) return null;
+
+    return (
+      <p
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          bottom: 0,
+          width: '100vw',
+          padding: 10,
+          backgroundColor: '#828BD3',
+          color: 'linen',
+          fontWeight: 900,
+        }}
+      >
+        {message}
+      </p>
+    );
+  }
+
   render() {
-    const { user, confirmResult } = this.state;
+    const { chat, user, confirmResult } = this.state;
     return (
       <div style={{ flex: 1 }}>
         {!user && !confirmResult && this.renderPhoneNumberInput()}
-
-        {this.renderMessage()}
 
         {!user && confirmResult && this.renderVerificationCodeInput()}
 
         {user && (
           <div
             style={{
+              display: 'flex',
               padding: 15,
               justifyContent: 'center',
               alignItems: 'center',
-              backgroundColor: '#77dd77',
-              flex: 1,
+              backgroundColor: 'linen',
+              width: '100%',
+              height: '100vh',
+              flexWrap: 'wrap',
             }}
           >
-            <p style={{ fontSize: 25 }}>Signed In!</p>
-            <p>{JSON.stringify(user)}</p>
-            <button
-              type="submit"
+            <span
               style={{
-                marginLeft: 20,
-                cursor: 'pointer',
-                backgroundColor: '#828BD3',
-                color: '#00000090',
-                padding: 10,
-                borderRadius: 5,
-                fontWeight: 700,
+                display: 'flex',
+                justifyContent: 'center',
+                width: '100vw',
               }}
-              onClick={this.signOut}
             >
-              LOGOUT
-            </button>
+              <img
+                alt="logo"
+                draggable="false"
+                style={{
+                  userSelect: 'none',
+                  objectFit: 'cover',
+                  width: 360,
+                  height: 60,
+                }}
+                src="https://premiumads.org/assets/media/premiumLogo.png"
+              />
+            </span>
+            <div
+              style={{
+                display: this.state.chat ? '' : 'none',
+                height: 440,
+                overflow: 'hidden',
+                backgroundColor: '#fff',
+                top: 0,
+              }}
+            >
+              <iframe
+                title="chat"
+                width="360"
+                height="440"
+                src="https://tlk.io/premium-ads"
+              />
+            </div>
+            <div
+              style={{
+                display: this.state.chat ? 'none' : '',
+                height: 370,
+                width: 360,
+              }}
+            >
+              <model-viewer
+                src="models/Astronaut.glb"
+                alt="A 3D model of an astronaut"
+                background-color="#70BCD1"
+                shadow-intensity="1"
+                camera-controls
+                preload
+                reveal="auto"
+                auto-rotate
+                ar
+                magic-leap
+                style={{
+                  height: 370,
+                  width: 360,
+                  top: 0,
+                }}
+              />
+              <div
+                style={{
+                  position: 'relative',
+                  bottom: '25vh',
+                  color: '#828BD3',
+                  fontSize: 70,
+                  fontWeight: 900,
+                  transform: 'rotate(-45deg)',
+                  textShadow: '5px 5px #000',
+                  userSelect: 'none',
+                  width: 370,
+                }}
+              >
+                SOLD OUT
+              </div>
+            </div>
+            <div
+              style={{
+                width: '100vw',
+                display: 'flex',
+                justifyContent: 'center',
+                flexDirection: 'column',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100vw',
+                  flexWrap: 'wrap',
+                  userSelect: 'none',
+                }}
+              >
+                <div
+                  style={{
+                    display: this.state.chat ? 'none' : 'flex',
+                    justifyContent: 'center',
+                    width: '100vw',
+                    fontSize: 30,
+                    fontWeight: 900,
+                  }}
+                >
+                  SPACE SUIT
+                </div>
+                <div
+                  style={{
+                    display: this.state.chat ? 'none' : 'flex',
+                    justifyContent: 'center',
+                    width: '100vw',
+                    fontSize: 20,
+                    fontWeight: 900,
+                  }}
+                >
+                  $5,000 USD
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: 200,
+                    paddingTop: 20,
+                  }}
+                >
+                  <button
+                    type="submit"
+                    style={{
+                      cursor: 'pointer',
+                      backgroundColor: '#C9DEDB',
+                      color: '#00000090',
+                      padding: 10,
+                      borderRadius: 5,
+                      fontWeight: 700,
+                      paddingRight: 12,
+                    }}
+                    onClick={() => this.setState({ chat: !chat })}
+                  >
+                    {this.state.chat ? '🛒 SHOP' : '💬 CHAT'}
+                  </button>
+                  <button
+                    type="submit"
+                    style={{
+                      cursor: 'pointer',
+                      backgroundColor: '#828BD3',
+                      color: '#00000090',
+                      padding: 10,
+                      borderRadius: 5,
+                      fontWeight: 700,
+                    }}
+                    onClick={this.signOut}
+                  >
+                    LOGOUT
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         )}
+        <div
+          style={{
+            position: 'fixed',
+            userSelect: 'none',
+            bottom: 10,
+            left: 0,
+            paddingLeft: 'calc(50vw - 76px)',
+            flexDirection: 'flex-row',
+            color: '#828BD3',
+            fontWeight: 900,
+            fontSize: 18,
+            fontFamily:
+              '"Geeza Pro", "Nadeem", "Al Bayan", "DecoType Naskh", "DejaVu Serif", "STFangsong", "STHeiti", "STKaiti", "STSong", "AB AlBayan", "AB Geeza", "AB Kufi", "DecoType Naskh", "Aldhabi", "Andalus", "Sakkal Majalla", "Simplified Arabic", "Traditional Arabic", "Arabic Typesetting", "Urdu Typesetting", "Droid Naskh", "Droid Kufi", "Roboto", "Tahoma", "Times New Roman", "Arial", seri',
+          }}
+        >
+          <span style={{ width: 152 }}>© PREMIUM ADS 2020</span>
+        </div>
+        {this.renderMessage()}
       </div>
     );
   }
