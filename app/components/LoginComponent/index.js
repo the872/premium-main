@@ -139,6 +139,7 @@ class LoginComponent extends React.Component {
             title="hello"
             style={{
               pointerEvents: 'none',
+              borderRadius: 5,
             }}
             width="360"
             height="270"
@@ -233,6 +234,7 @@ class LoginComponent extends React.Component {
             title="hello"
             style={{
               pointerEvents: 'none',
+              borderRadius: 5,
             }}
             width="360"
             height="270"
@@ -353,6 +355,7 @@ class LoginComponent extends React.Component {
               }}
             >
               <iframe
+                style={{ borderRadius: 5 }}
                 title="chat"
                 width="360"
                 height="440"
