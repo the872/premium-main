@@ -10,8 +10,6 @@ import firebase from '../../firebase';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-const model = '../../objects/Astronaut.glb';
-
 /* eslint-disable react/prefer-stateless-function */
 class LoginComponent extends React.Component {
   constructor(props) {
@@ -372,7 +370,7 @@ class LoginComponent extends React.Component {
               }}
             >
               <model-viewer
-                src={model}
+                src="m/Astronaut.glb"
                 alt="A 3D model of an astronaut"
                 background-color="#70BCD1"
                 shadow-intensity="1"
