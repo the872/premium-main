@@ -370,7 +370,7 @@ class LoginComponent extends React.Component {
               }}
             >
               <model-viewer
-                src="m/Astronaut.glb"
+                src="models/Astronaut.glb"
                 alt="A 3D model of an astronaut"
                 background-color="#70BCD1"
                 shadow-intensity="1"
